@@ -62,7 +62,7 @@ The skill must support:
 - existing deployed Landing Zone plus ExaCC extension-only
 - dependency-output handling
 - OCID fallback when dependency outputs are unavailable
-- IAM, governance, observability, identity-domain, and Resource Manager handoff concerns
+- IAM, governance, security, observability, identity-domain, and Resource Manager handoff concerns
 
 ## Non-Goals
 
@@ -82,7 +82,7 @@ The skill must not:
 The skill must coordinate with related or planned skills:
 
 - `oci-lz-blueprint-builder`: planned skill for when the user needs to design, generate, customize, or review the Landing Zone foundation.
-- `oci-lz-workload-extension-builder`: use for non-ExaCC workload extensions.
+- `oci-lz-workload-extension-builder`: use for non-ExaCC workload extensions when available; it is not packaged in this repository.
 - `oci-lz-orchestrator-contract-advisor`: use when Orchestrator contract, dependency inputs, outputs, RMS behavior, or runtime troubleshooting must be verified.
 
 The ExaCC skill owns ExaDB-C@C / ExaCC workload-extension behavior. It should not absorb unrelated workload-extension logic.
@@ -185,6 +185,7 @@ Typical dependencies include:
 - `tags_dependency`
 - `topics_dependency` when topics are external
 - `logging_dependency` when logs are external
+- `kms_dependency` and `vaults_dependency` when CIS2 keys or vaults are external to the current operation
 
 Identity-domain outputs must be handled according to the active Orchestrator contract. The skill must not assume `identity_domains_output.json` is a supported dependency input unless the active contract proves it.
 
@@ -201,6 +202,8 @@ Generated artifacts must:
 - avoid unsupported families
 - avoid stale source paths or unrelated workload references
 - keep drafts, upstream references, generated samples, and customer-ready outputs clearly separated
+
+For UC2 and UC3, generated deployable JSON is out of scope until those use cases are completed in the source repository and dedicated templates exist. Until then, any UC2/UC3 output must be limited to requirements, design notes, or explicitly non-deployable prototype material.
 
 The skill must not create invented artifacts such as deployment manifests, profile YAML files, wrapper JSON files, or execution maps unless the user explicitly asks for them.
 

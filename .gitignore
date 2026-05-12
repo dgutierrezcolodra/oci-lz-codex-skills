@@ -1,0 +1,16 @@
+.DS_Store
+**/.DS_Store
+
+# Local test/output artifacts
+tmp/
+out/
+generated/
+
+# Terraform local state and caches
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Customer/local environment data
+*_output.json
+*.tfvars

@@ -1,0 +1,4 @@
+interface:
+  display_name: "OCI LZ Contract Advisor"
+  short_description: "Verify OCI Landing Zones Orchestrator contract, RMS behavior, dependencies, outputs, and troubleshooting"
+  default_prompt: "Help me verify or troubleshoot OCI Landing Zones Orchestrator contract and runtime behavior: supported families, backing modules, multistack decomposition, RMS Facade, dependency files, output files, repo aliases, IAM requirements, workload handoff, config collisions, upgrades, and related repo history. Use OCI Open LZ or Operating Entities context only when it clarifies orchestrator usage."

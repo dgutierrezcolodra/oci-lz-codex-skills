@@ -1,0 +1,4 @@
+interface:
+  display_name: "OCI LZ Blueprint Builder"
+  short_description: "Build Jsonnet-generated LZ blueprints"
+  default_prompt: "Use $oci-lz-blueprint-builder to design and generate Jsonnet-backed OCI Landing Zone blueprint JSON files."

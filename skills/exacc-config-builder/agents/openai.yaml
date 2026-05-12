@@ -1,0 +1,4 @@
+interface:
+  display_name: "ExaCC Config Builder"
+  short_description: "Generate Jsonnet-backed ExaCC JSON"
+  default_prompt: "Use $exacc-config-builder to ask the ExaCC deployment questions and generate Jsonnet-backed OCI Landing Zone JSON files."

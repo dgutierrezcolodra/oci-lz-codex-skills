@@ -6,7 +6,6 @@ This repository packages Codex skills and repo-level agent guidance for OCI Land
 
 ```text
 skills/
-  oci-lz-blueprint-builder/
   exacc-config-builder/
   oci-lz-orchestrator-contract-advisor/
 
@@ -20,10 +19,6 @@ docs/
 ```
 
 ## Skills
-
-### `oci-lz-blueprint-builder`
-
-Use this skill to design, generate, customize, or review OCI Landing Zone foundation blueprints, such as One-OE, Multi-OE, Multi-Tenancy, and related runtime variants.
 
 ### `exacc-config-builder`
 
@@ -58,6 +53,10 @@ It checks areas such as:
 - provider and RMS failures
 - version drift across local checkouts, branches, tags, and Resource Manager links
 
+## Planned Skills
+
+`oci-lz-blueprint-builder` is a planned skill for Landing Zone foundation blueprint design and review. It is mentioned because ExaCC work may depend on foundation context, but it still needs to be created and is not included in this package.
+
 ## Source Of Truth
 
 The official OCI Landing Zone repositories are the source of truth:
@@ -75,7 +74,6 @@ Copy the desired skill folders into your Codex skills directory:
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R skills/oci-lz-blueprint-builder ~/.codex/skills/
 cp -R skills/exacc-config-builder ~/.codex/skills/
 cp -R skills/oci-lz-orchestrator-contract-advisor ~/.codex/skills/
 ```

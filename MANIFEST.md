@@ -4,9 +4,14 @@
 
 | Skill | Purpose |
 |---|---|
-| `skills/oci-lz-blueprint-builder` | Landing Zone foundation blueprint design and review. |
 | `skills/exacc-config-builder` | ExaDB-C@C / ExaCC workload-extension design, generation, and review. |
 | `skills/oci-lz-orchestrator-contract-advisor` | Orchestrator contract verification and troubleshooting. |
+
+## Planned Skills
+
+| Skill | Purpose |
+|---|---|
+| `oci-lz-blueprint-builder` | Planned skill for Landing Zone foundation blueprint design and review. Mentioned as future work, but not packaged in this repository. |
 
 ## Repo Agent Guidance
 

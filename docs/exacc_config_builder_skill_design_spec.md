@@ -79,9 +79,9 @@ The skill must not:
 
 ## Relationship With Other Skills
 
-The skill must coordinate with related skills:
+The skill must coordinate with related or planned skills:
 
-- `oci-lz-blueprint-builder`: use when the user needs to design, generate, customize, or review the Landing Zone foundation.
+- `oci-lz-blueprint-builder`: planned skill for when the user needs to design, generate, customize, or review the Landing Zone foundation.
 - `oci-lz-workload-extension-builder`: use for non-ExaCC workload extensions.
 - `oci-lz-orchestrator-contract-advisor`: use when Orchestrator contract, dependency inputs, outputs, RMS behavior, or runtime troubleshooting must be verified.
 
@@ -156,7 +156,7 @@ If the user requests UC2 or UC3 and no dedicated templates exist in the selected
 
 If the user needs a new Landing Zone and ExaCC together, the skill must use the single-stack model unless the user requests another supported approach.
 
-It must coordinate with `oci-lz-blueprint-builder` when foundation design is needed.
+Foundation design is planned to be handled by `oci-lz-blueprint-builder`. Until that skill exists in this package, the ExaCC skill must treat foundation design as separate scope and require explicit, source-verified foundation decisions before final ExaCC generation.
 
 ### Existing Landing Zone + ExaCC
 

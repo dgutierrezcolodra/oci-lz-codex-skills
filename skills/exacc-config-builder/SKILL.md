@@ -9,7 +9,7 @@ description: Use when generating, customizing, or reviewing OCI Landing Zone Ope
 
 Use this skill as a customer-facing guided builder for producing OCI Landing Zone Orchestrator JSON configuration files for the ExaDB-C@C workload extension. The agent must ask the missing deployment questions, derive changes from the current source templates, model the deployment in Jsonnet for production-grade generation, and emit valid JSON without inventing unsupported Orchestrator families.
 
-This is the ExaDB-C@C specialization. It can run standalone when the customer already has a deployed landing zone and only needs the ExaCC workload extension. Use `oci-lz-blueprint-builder` only when the foundation blueprint must be designed, generated, changed, or source-verified in detail. Use `oci-lz-workload-extension-builder` for non-ExaCC workload extensions.
+This is the ExaDB-C@C specialization. It can run standalone when the customer already has a deployed landing zone and only needs the ExaCC workload extension. A separate `oci-lz-blueprint-builder` skill is planned for foundation blueprint design, generation, and review; until it exists in this package, treat foundation design as separate scope and do not pretend this ExaCC skill covers full foundation generation. Use `oci-lz-workload-extension-builder` for non-ExaCC workload extensions when available.
 
 ## Source Rule
 
@@ -38,7 +38,7 @@ For ORM/RMS handoff, use the OCI Landing Zones Orchestrator version referenced b
    - Use case: use the numbered scenarios from `exacc_use_cases/readme.md`: `UC1` shared ExaDB-C@C platform with shared infrastructure and shared VMCs/AVMCs across environments; `UC2` hybrid platform with shared infrastructure and dedicated VMCs/AVMCs per environment; `UC3` dedicated platform with dedicated infrastructure and VMCs/AVMCs per environment; or a custom combination explicitly derived from those scenarios.
    - Template support: confirm whether the selected source ref contains templates for the requested use case and stack mode. If it only contains UC1 templates, do not present UC2 or UC3 generation as native support; handle it as a tailored extension that needs explicit source/model changes and validation.
    - Execution target: Terraform CLI, Resource Manager/rms-facade, or config-only output.
-   - If the foundation blueprint must be designed from scratch or changed, use `oci-lz-blueprint-builder` first and return to this skill for ExaCC placement, IAM, and observability.
+   - If the foundation blueprint must be designed from scratch or changed, treat it as planned foundation-builder scope. Do not generate final ExaCC artifacts until the foundation choices are explicit and source-verified.
 
 2. **Intake gate before generation**
    - Do not generate or present customer-ready ExaDB-C@C/ExaCC workload-extension JSON until the workload requirements are explicit.
@@ -46,7 +46,7 @@ For ORM/RMS handoff, use the OCI Landing Zones Orchestrator version referenced b
    - It is acceptable to copy upstream templates as a clearly labeled `draft` or `upstream-reference` set, but do not call them configured, customer-ready, final, or deployable.
    - Do not silently keep upstream defaults for customer-facing values such as region, home region, naming prefix, compartment names, environment/project names, identity domain, admin group names, notification emails, CIS level, alarm enabled state, alarm thresholds, logging/service connector choices, dependency outputs, or separate-vs-combined stack boundaries.
    - For ExaCC UC1 specifically, follow the UC1 semantics from `exacc_use_cases/readme.md`; do not assume `COMMON-DOMAIN`, Frankfurt names, example email subscriptions, or sample load balancer/backend values unless the customer explicitly confirms them.
-   - If the user asks for One-OE plus any hub variant and ExaCC together, first determine whether the landing zone already exists. For an existing deployed LZ, do not invoke `oci-lz-blueprint-builder` by default; ask for deployed LZ shape, output dependencies, and OCID fallbacks, then generate only the ExaCC extension artifacts. Coordinate with `oci-lz-blueprint-builder` only when the foundation must be generated, changed, or checked against its official hub runtime sequencing.
+   - If the user asks for One-OE plus any hub variant and ExaCC together, first determine whether the landing zone already exists. For an existing deployed LZ, ask for deployed LZ shape, output dependencies, and OCID fallbacks, then generate only the ExaCC extension artifacts. If the foundation must be generated, changed, or checked against official hub runtime sequencing, treat that as planned foundation-builder scope and make the needed foundation decisions explicit before returning to ExaCC placement, IAM, and observability.
    - Capture the accepted answers in the README or final handoff notes before generation. Do not create separate profile/manifest JSON or YAML artifacts unless the user explicitly asks for them. Treat unanswered customer-facing values as blockers, not as assumptions hidden in the output.
 
 3. **Ask only missing questions**

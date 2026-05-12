@@ -36,7 +36,6 @@ For real handoff, skills must pin the selected source to a tag, commit SHA, or r
 Before publishing updates, validate each skill with the Codex skill validator when available:
 
 ```bash
-python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/oci-lz-blueprint-builder
 python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/exacc-config-builder
 python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/oci-lz-orchestrator-contract-advisor
 ```

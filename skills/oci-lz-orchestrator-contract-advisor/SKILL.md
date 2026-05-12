@@ -9,7 +9,7 @@ description: "Use when OCI Landing Zone Orchestrator contract or runtime behavio
 
 Use this skill to verify the OCI Landing Zone Orchestrator contract and runtime behavior. It protects blueprint and workload-extension builders from wrong assumptions about accepted top-level families, Resource Manager/rms-facade behavior, dependency files, output files, stack sequencing, and deployment troubleshooting.
 
-This is not a configuration builder. Use `oci-lz-blueprint-builder`, `oci-lz-workload-extension-builder`, or `exacc-config-builder` to design and generate customer configurations, then use this skill to validate the Orchestrator-facing contract and deployment handoff.
+This is not a configuration builder. Use `exacc-config-builder` for ExaDB-C@C / ExaCC workload-extension generation and the planned `oci-lz-blueprint-builder` when foundation blueprint generation exists. Use this skill to validate the Orchestrator-facing contract and deployment handoff.
 
 ## Scope Boundary
 

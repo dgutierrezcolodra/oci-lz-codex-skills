@@ -140,14 +140,14 @@ The skill must use only the use cases documented in `workload-extensions/exacc/e
 Current template support:
 
 - UC1 has native JSON templates in the current temporary source ref.
-- UC2 and UC3 are documented use-case models, but do not currently have native template-backed JSON files in `we_exacc_update`.
+- UC2 and UC3 are documented use-case models, but they are pending completion and do not currently have native template-backed JSON files in `we_exacc_update`.
 
 If the user requests UC2 or UC3 and no dedicated templates exist in the selected ref, the skill must:
 
 - classify the use case correctly
 - stop before final generation
-- explain that the selected source ref only has UC1 templates
-- ask whether the user wants to proceed with a tailored design based on UC2/UC3 semantics
+- explain that UC2/UC3 are pending completion in the selected source ref
+- ask whether the user wants to switch to UC1 or capture requirements/design notes for future UC2/UC3 completion
 - avoid relabeling UC1 output as UC2 or UC3
 
 ## Deployment Model Behavior
@@ -256,8 +256,8 @@ Recommended publication status for v0.1:
 - Ready for single-stack vs multi-stack selection.
 - Ready for dependency-output and OCID-fallback handling.
 - Ready for Orchestrator contract-aware review.
-- Conditional for UC2/UC3 generation until dedicated templates exist.
+- Not ready for UC2/UC3 generation until those use cases are completed and dedicated templates exist.
 
 Safe public statement:
 
-> The ExaCC skill supports guided ExaDB-C@C workload-extension design and JSON generation. UC1 is supported by the current source templates for single-stack and multi-stack flows. UC2 and UC3 are supported as documented use-case models; if dedicated templates are not present in the selected source ref, the skill treats them as tailored designs and asks for explicit confirmation before generation.
+> The ExaCC skill supports guided ExaDB-C@C workload-extension design and JSON generation. UC1 is supported by the current source templates for single-stack and multi-stack flows. UC2 and UC3 are documented use-case models, but they are pending completion; if dedicated templates are not present in the selected source ref, the skill stops before generation and can only capture requirements or design notes for future UC2/UC3 work.

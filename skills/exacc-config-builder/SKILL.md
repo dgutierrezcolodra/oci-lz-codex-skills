@@ -23,6 +23,12 @@ For ExaCC use-case classification, base the taxonomy only on `workload-extension
 
 Read `references/source-map.md` when you need the source file map, current template families, source quirks, or dependency guidance.
 
+Read `references/uc1-patterns.md` when the selected use case is UC1 and you need stack boundaries, required inputs, dependency behavior, identity-domain handling, observability placement, or validation checks.
+
+Read `references/uc2-patterns.md` when the selected use case is UC2. In the current temporary source ref, treat UC2 as pending completion unless dedicated UC2 templates are present in the selected ref.
+
+Read `references/uc3-patterns.md` when the selected use case is UC3. In the current temporary source ref, treat UC3 as pending completion unless dedicated UC3 templates are present in the selected ref.
+
 Read `references/jsonnet-approach.md` before designing or changing generated blueprints, workload-extension variants, or validation rules.
 
 For production handoff, pin the remote source to a tag or commit SHA. If the customer explicitly requests a branch, resolve and record the branch head SHA and state the drift risk. Do not use hosted GitHub connectors; inspect remote sources through standard Git/HTTP/raw URLs. Use customer-provided local checkouts only for local config files, failing local runs, or when the customer explicitly asks to use that checkout. Always inspect the actual JSON templates before generating output.
@@ -36,7 +42,7 @@ For ORM/RMS handoff, use the OCI Landing Zones Orchestrator version referenced b
    - Deployment approach: `single-stack` for PoC/exploration or `multi-stack` for production/separate lifecycle.
    - Foundation state: fresh landing zone plus ExaCC, or extension-only on an already deployed landing zone.
    - Use case: use the numbered scenarios from `exacc_use_cases/readme.md`: `UC1` shared ExaDB-C@C platform with shared infrastructure and shared VMCs/AVMCs across environments; `UC2` hybrid platform with shared infrastructure and dedicated VMCs/AVMCs per environment; `UC3` dedicated platform with dedicated infrastructure and VMCs/AVMCs per environment; or a custom combination explicitly derived from those scenarios.
-   - Template support: confirm whether the selected source ref contains templates for the requested use case and stack mode. If it only contains UC1 templates, do not present UC2 or UC3 generation as native support; handle it as a tailored extension that needs explicit source/model changes and validation.
+   - Template support: confirm whether the selected source ref contains templates for the requested use case and stack mode. If it only contains UC1 templates, do not present UC2 or UC3 generation as native support; handle UC2/UC3 as pending completion, not as supported output.
    - Execution target: Terraform CLI, Resource Manager/rms-facade, or config-only output.
    - If the foundation blueprint must be designed from scratch or changed, treat it as planned foundation-builder scope. Do not generate final ExaCC artifacts until the foundation choices are explicit and source-verified.
 
@@ -75,7 +81,7 @@ For ORM/RMS handoff, use the OCI Landing Zones Orchestrator version referenced b
    - Existing deployed LZ + extension-only: default to the inspected `multi-stack` ExaCC files for production/separate lifecycle. Generate no foundation blueprint JSON unless the customer explicitly asks for LZ changes. Consume saved dependency outputs when available; otherwise ask for OCIDs only for boundary references owned by the existing LZ, such as parent compartments, tag namespaces/tags, topics/logs, and identity domain.
    - For multi-stack identity with existing identity domains, verify whether the active Orchestrator applies `identity_domain_groups_configuration` without `identity_domains_configuration`. In Orchestrator `v2.1.0`, identity-domain groups are wired through the identity-domains module, so an existing-domain overlay or combined identity-domain configuration may be required.
    - Do not assume `identity_domains_output.json` can be passed back as an identity-domain dependency unless the active Orchestrator root/rms-facade contract exposes such an input. In Orchestrator `v2.1.0`, the checked contract does not expose or load an `identity_domains_dependency` input. For a separate ExaCC stack, replace `identity_domain_groups_configuration.default_identity_domain_id` with the actual identity domain OCID after the LZ deploys it, or build a same-operation/same-state update that includes the identity-domain configuration and merged groups.
-   - `UC2` and `UC3`: only generate from dedicated UC2/UC3 source templates if the selected ref contains them. If not, stop before final generation, explain that the selected ref only provides UC1 templates, and ask whether to proceed with a tailored design derived from the documented UC2/UC3 semantics.
+   - `UC2` and `UC3`: only generate from dedicated UC2/UC3 source templates if the selected ref contains them. If not, stop before final generation, explain that UC2/UC3 are pending completion in the selected source ref, and ask whether the user wants to switch to UC1 or capture requirements for future UC2/UC3 completion.
    - For other blueprints, inspect the selected blueprint's runtime files first, then map ExaCC compartments, groups, policies, topics, and alarms onto that hierarchy. Do not assume One-OE keys exist in Multi-OE or Multi-Tenancy.
 
 6. **Model in Jsonnet**
@@ -87,7 +93,7 @@ For ORM/RMS handoff, use the OCI Landing Zones Orchestrator version referenced b
 
 7. **Generate JSON**
    - Keep `upstream-reference` or `draft` artifacts physically separate from `customer` artifacts. Only the `customer` set may be described as configured for deployment.
-   - Preserve Orchestrator top-level families exactly, such as `compartments_configuration`, `identity_domains_configuration`, `identity_domain_groups_configuration`, `policies_configuration`, `tags_configuration`, `notifications_configuration`, `events_configuration`, `home_region_events_configuration`, `alarms_configuration`, `logging_configuration`, `service_connectors_configuration`, `cloud_guard_configuration`, `scanning_configuration`, and `security_zones_configuration`.
+   - Preserve Orchestrator top-level families exactly, such as `compartments_configuration`, `identity_domains_configuration`, `identity_domain_groups_configuration`, `policies_configuration`, `tags_configuration`, `notifications_configuration`, `events_configuration`, `home_region_events_configuration`, `alarms_configuration`, `logging_configuration`, `service_connectors_configuration`, `cloud_guard_configuration`, `scanning_configuration`, `security_zones_configuration`, and `vaults_configuration`.
    - Keep logical keys when the deployment will pass dependency outputs. Replace keys with OCIDs only when the customer explicitly will not use dependency files.
    - When cloning projects/environments, update every key, `parent_id`, topic destination, compartment path, policy statement, display name, and description together.
    - When cloning prod/preprod project patterns, perform exact token/boundary-aware replacements and handle `PREPROD` before `PROD`; otherwise `PREPROD` can be misclassified as prod. Validate by scanning cloned policies for project2 groups pointing at project1 compartment names.

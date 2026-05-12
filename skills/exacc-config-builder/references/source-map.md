@@ -90,11 +90,18 @@ Known source quirk:
 - `policies_configuration`
 - Contains One-OE foundation structure plus ExaCC compartments, groups, and policies for use case 1.
 
-`single-stack/exacc_security_cis*_uc1.json`:
+`single-stack/exacc_security_cis1_uc1.json`:
 
 - `cloud_guard_configuration`
 - `scanning_configuration`
 - `security_zones_configuration`
+
+`single-stack/exacc_security_cis2_uc1.json`:
+
+- `cloud_guard_configuration`
+- `scanning_configuration`
+- `security_zones_configuration`
+- `vaults_configuration`
 
 `single-stack/exacc_observability_cis*_uc1.json`:
 
@@ -102,7 +109,7 @@ Known source quirk:
 - `events_configuration`
 - `home_region_events_configuration`
 - `alarms_configuration`
-- Some variants also include `logging_configuration` and `service_connectors_configuration`.
+- The currently inspected UC1 CIS1/CIS2 files include `service_connectors_configuration`; inspect the selected source ref before assuming `logging_configuration` is present.
 - Choose CIS1/CIS2 based on the accepted security baseline after inspecting the corresponding runtime files.
 
 `multi-stack/exacc_identity_uc1.json`:
@@ -128,13 +135,13 @@ Base use-case selection only on `workload-extensions/exacc/exacc_use_cases/readm
 - `UC2`: Hybrid ExaDB-C@C Platform: shared infrastructure with dedicated VMCs/AVMCs per environment.
 - `UC3`: Dedicated ExaDB-C@C Platform: fully dedicated infrastructure and VMCs/AVMCs per environment.
 
-Do not introduce alternate classification fields in intake or generated handoff notes unless the customer explicitly asks for a local alias. If the customer has a mixed model, describe it as an explicit custom combination derived from `UC1`, `UC2`, and `UC3`; only compose it from existing template sections after the customer accepts that it is tailored work rather than native template support. Keep infra and DB administration separated unless the customer explicitly wants a combined team.
+Do not introduce alternate classification fields in intake or generated handoff notes unless the customer explicitly asks for a local alias. If the customer has a mixed model, describe it as an explicit custom combination derived from `UC1`, `UC2`, and `UC3`; only compose it from existing template sections when the selected source ref provides the required templates or when the user explicitly asks for non-deployable design notes. Keep infra and DB administration separated unless the customer explicitly wants a combined team.
 
 Template support in the current temporary ref:
 
 - The enumerated source templates are UC1 templates.
 - If a customer requests UC2 or UC3 and the selected ref still lacks dedicated UC2/UC3 templates, do not call UC2/UC3 output native template support.
-- Treat UC2/UC3 as a tailored design derived from the documented use-case semantics, ask for explicit approval to tailor the model, and validate every cloned compartment, group, policy, event, alarm, and notification reference before handoff.
+- Treat UC2/UC3 as pending completion, stop before deployable generation, and ask whether the user wants to switch to UC1 or capture requirements/design notes for the unfinished UC2/UC3 work.
 
 ## Dependency Guidance
 
@@ -144,6 +151,7 @@ When generating multi-stack configs with logical keys, list required dependencie
 - `tags_dependency` when using `defined_tags` that reference a tag namespace/tag created by a previous stack.
 - `topics_dependency` only when generated files reference notification topics that are not created in the same operation.
 - `logging_dependency` only when generated files reference logs created outside the same operation.
+- `kms_dependency` and `vaults_dependency` only when generated files reference keys or vaults created outside the same operation.
 
 If the customer cannot supply dependency outputs, ask for OCIDs and replace only the boundary references that come from prior stacks. Preserve generated resource keys inside the current JSON set.
 

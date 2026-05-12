@@ -27,8 +27,9 @@ Use this skill to design, generate, customize, or review ExaDB-C@C / ExaCC workl
 Current publication scope:
 
 - UC1 has native template-backed support in the current temporary source ref.
-- UC2 and UC3 are supported as documented use-case models.
-- If dedicated UC2/UC3 templates are not present in the selected source ref, the skill must treat them as tailored designs and ask for explicit confirmation before final generation.
+- UC2 and UC3 are documented use-case models, but they are pending completion.
+- If dedicated UC2/UC3 templates are not present in the selected source ref, the skill must stop before generation and treat them as pending work, not as supported tailored generation flows.
+- UC1, UC2, and UC3 have separate reference files under `skills/exacc-config-builder/references/` so the agent does not flatten the three models into one generic pattern.
 - Existing deployed Landing Zone scenarios default to multi-stack / extension-only.
 - Fresh Landing Zone plus ExaCC scenarios use single-stack when the foundation and workload extension should be deployed together.
 

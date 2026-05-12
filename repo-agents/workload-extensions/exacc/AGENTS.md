@@ -64,7 +64,7 @@ Keep generated or edited artifacts aligned to the existing stack boundaries:
   - one of `single-stack/exacc_observability_cis1_uc1.json` or `single-stack/exacc_observability_cis2_uc1.json`
   - one of `single-stack/exacc_security_cis1_uc1.json` or `single-stack/exacc_security_cis2_uc1.json`
 
-If UC2, UC3, or a custom variant is requested, first confirm that matching source templates exist or explicitly document that the work is a tailored extension derived from the documented use-case model. Do not relabel UC1 files as UC2 or UC3 without changing and validating the resource model.
+If UC2, UC3, or a custom variant is requested, first confirm that matching source templates exist. In the current temporary source state, UC2 and UC3 are pending completion; do not generate deployable UC2/UC3 files or relabel UC1 files as UC2/UC3. If the user wants to continue, capture requirements or design notes as unfinished work.
 
 Do not add invented handoff artifacts such as deployment manifests, profile YAML files, wrapper JSON files, or execution maps unless the user explicitly requests them. Procedure notes, dependency lists, Resource Manager variables, and validation results belong in README-style documentation or in the final handoff response.
 
@@ -79,12 +79,14 @@ Preserve exact Orchestrator top-level family names. Examples used by this extens
 - `tags_configuration`
 - `notifications_configuration`
 - `events_configuration`
+- `home_region_events_configuration`
 - `alarms_configuration`
 - `logging_configuration`
 - `service_connectors_configuration`
 - `cloud_guard_configuration`
 - `scanning_configuration`
 - `security_zones_configuration`
+- `vaults_configuration`
 
 Do not add families such as `exacc_configuration`, `exacs_configuration`, or native ExaDB-C@C infrastructure families unless the active Orchestrator version and backing modules prove that those families are supported.
 

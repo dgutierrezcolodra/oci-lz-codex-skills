@@ -7,7 +7,7 @@ Use Jsonnet as the primary generation layer for OCI Landing Zone Orchestrator JS
 The team already operates Jsonnet, and this workload needs repeatable generation of many closely related JSON artifacts:
 
 - ExaCC identity and observability variants.
-- Shared, hybrid, or dedicated ExaDB-C@C use cases.
+- UC1 ExaDB-C@C generation now, with UC2/UC3 added only after those use cases are completed in the source repo.
 - Repeated environment and project compartment patterns.
 - Stack-specific outputs for CLI or Resource Manager/rms-facade.
 
@@ -57,7 +57,7 @@ Use Jsonnet objects/functions for:
 
 - `deployment`: blueprint, stack mode, use case (`UC1`, `UC2`, `UC3`, or an explicit custom combination derived from `exacc_use_cases/readme.md`), execution target, environments, projects, naming, identity domain, observability profile.
 - `stackBoundary`: generated config files, top-level families included, required dependencies, generated outputs.
-- `dependencyRequirement`: `compartments_dependency`, `tags_dependency`, `topics_dependency`, `logging_dependency`, and any OCID replacement fallback.
+- `dependencyRequirement`: `compartments_dependency`, `tags_dependency`, `topics_dependency`, `logging_dependency`, `kms_dependency`, `vaults_dependency`, and any OCID replacement fallback.
 - `logicalKeyRef`: key reference plus source: `generated`, `dependency`, or `ocid`.
 - `orchestratorFamily`: allowed top-level families only.
 
@@ -65,6 +65,7 @@ Useful invariants:
 
 - `stack_mode` is `single-stack` or `multi-stack`.
 - `use_case` is `UC1`, `UC2`, `UC3`, or an explicit custom combination derived from `workload-extensions/exacc/exacc_use_cases/readme.md`.
+- `UC2` and `UC3` must not export deployable JSON unless the selected source ref contains completed dedicated templates for those use cases.
 - `single-stack` may contain foundation plus ExaCC families in one state.
 - `multi-stack` must declare dependencies for parent landing-zone resources referenced by key.
 - No duplicate top-level family should be split across files for one RMS operation unless merge behavior has been explicitly confirmed.
